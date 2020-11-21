@@ -19,17 +19,17 @@ import com.animee.forecast.db.DBManager;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MainActivity extends AppCompatActivity implements View.OnClickListener{
-    ImageView addCityIv,moreIv;
+public class MainActivity extends AppCompatActivity implements View.OnClickListener {
+    ImageView addCityIv, moreIv;
     LinearLayout pointLayout;
-    RelativeLayout outLayout;
     ViewPager mainVp;
-//    ViewPager的数据源
-    List<Fragment>fragmentList;
-//    表示需要显示的城市的集合
-    List<String>cityList;
-//    表示ViewPager的页数指数器显示集合
-    List<ImageView>imgList;
+    RelativeLayout outLayout;
+    //    ViewPager的数据源
+    List<Fragment> fragmentList;
+    //    表示需要显示的城市的集合
+    List<String> cityList;
+    //    表示ViewPager的 页数 指数器显示集合
+    List<ImageView> imgList;
     private CityFragmentPagerAdapter adapter;
     private SharedPreferences pref;
     private int bgNum;
@@ -44,7 +44,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         outLayout = findViewById(R.id.main_out_layout);
         exchangeBg();
         mainVp = findViewById(R.id.main_vp);
-//        添加点击事件
+        //添加点击事件
         addCityIv.setOnClickListener(this);
         moreIv.setOnClickListener(this);
 
@@ -52,18 +52,18 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         cityList = DBManager.queryAllCityName();  //获取数据库包含的城市信息列表
         imgList = new ArrayList<>();
 
-        if (cityList.size()==0) {
+        if (cityList.size() == 0) {
             cityList.add("北京");
         }
         /* 因为可能搜索界面点击跳转此界面，会传值，所以此处获取一下*/
         try {
             Intent intent = getIntent();
             String city = intent.getStringExtra("city");
-            if (!cityList.contains(city)&&!TextUtils.isEmpty(city)) {
+            if (!cityList.contains(city) && !TextUtils.isEmpty(city)) {
                 cityList.add(city);
             }
-        }catch (Exception e){
-            Log.i("animee","程序出现问题了！！");
+        } catch (Exception e) {
+            Log.i("animee", "程序出现问题了！！");
         }
 //        初始化ViewPager页面的方法
         initPager();
@@ -72,14 +72,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 //        创建小圆点指示器
         initPoint();
 //        设置最后一个城市信息
-        mainVp.setCurrentItem(fragmentList.size()-1);
+        mainVp.setCurrentItem(fragmentList.size() - 1);
 //        设置ViewPager页面监听
         setPagerListener();
     }
 
 
     //        换壁纸的函数
-    public void exchangeBg(){
+    public void exchangeBg() {
         pref = getSharedPreferences("bg_pref", MODE_PRIVATE);
         bgNum = pref.getInt("bg", 2);
         switch (bgNum) {
@@ -95,12 +95,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
 
     }
+
     private void setPagerListener() {
         /* 设置监听事件*/
         mainVp.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
             }
+
             @Override
             public void onPageSelected(int position) {
                 for (int i = 0; i < imgList.size(); i++) {
@@ -108,6 +110,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 }
                 imgList.get(position).setImageResource(R.mipmap.a2);
             }
+
             @Override
             public void onPageScrollStateChanged(int state) {
             }
@@ -121,11 +124,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             pIv.setImageResource(R.mipmap.a1);
             pIv.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT));
             LinearLayout.LayoutParams lp = (LinearLayout.LayoutParams) pIv.getLayoutParams();
-            lp.setMargins(0,0,20,0);
+            lp.setMargins(0, 0, 20, 0);
             imgList.add(pIv);
             pointLayout.addView(pIv);
         }
-        imgList.get(imgList.size()-1).setImageResource(R.mipmap.a2);
+        imgList.get(imgList.size() - 1).setImageResource(R.mipmap.a2);
 
 
     }
@@ -135,7 +138,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         for (int i = 0; i < cityList.size(); i++) {
             CityWeatherFragment cwFrag = new CityWeatherFragment();
             Bundle bundle = new Bundle();
-            bundle.putString("city",cityList.get(i));
+            bundle.putString("city", cityList.get(i));
             cwFrag.setArguments(bundle);
             fragmentList.add(cwFrag);
         }
@@ -146,10 +149,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         Intent intent = new Intent();
         switch (v.getId()) {
             case R.id.main_iv_add:
-                intent.setClass(this,CityManagerActivity.class);
+                intent.setClass(this, CityManagerActivity.class);
                 break;
             case R.id.main_iv_more:
-                intent.setClass(this,MoreActivity.class);
+                intent.setClass(this, MoreActivity.class);
                 break;
         }
         startActivity(intent);
@@ -161,7 +164,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         super.onRestart();
 //        获取数据库当中还剩下的城市集合
         List<String> list = DBManager.queryAllCityName();
-        if (list.size()==0) {
+        if (list.size() == 0) {
             list.add("北京");
         }
         cityList.clear();    //重写加载之前，清空原本数据源
@@ -174,6 +177,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         imgList.clear();
         pointLayout.removeAllViews();   //将布局当中所有元素全部移除
         initPoint();
-        mainVp.setCurrentItem(fragmentList.size()-1);
+        mainVp.setCurrentItem(fragmentList.size() - 1);
     }
 }

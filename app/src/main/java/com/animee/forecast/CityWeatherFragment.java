@@ -116,13 +116,13 @@ public class CityWeatherFragment extends BaseFragment implements View.OnClickLis
         List<WeatherBean.ResultsBean.WeatherDataBean> futureList = resultsBean.getWeather_data();
         futureList.remove(0);
         for (int i = 0; i < futureList.size(); i++) {
-            View itemView = LayoutInflater.from(getActivity()).inflate(R.layout.item_main_center, null);
+            View itemView = LayoutInflater.from(getActivity()).inflate(R.layout.item_main_3days, null);
             itemView.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT));
             futureLayout.addView(itemView);
-            TextView idateTv = itemView.findViewById(R.id.item_center_tv_date);
-            TextView iconTv = itemView.findViewById(R.id.item_center_tv_con);
-            TextView itemprangeTv = itemView.findViewById(R.id.item_center_tv_temp);
-            ImageView iIv = itemView.findViewById(R.id.item_center_iv);
+            TextView idateTv = itemView.findViewById(R.id.item_3days_tv_date);
+            TextView iconTv = itemView.findViewById(R.id.item_3days_tv_con);
+            TextView itemprangeTv = itemView.findViewById(R.id.item_3days_tv_temp);
+            ImageView iIv = itemView.findViewById(R.id.item_3days_iv);
 //          获取对应的位置的天气情况
             WeatherBean.ResultsBean.WeatherDataBean dataBean = futureList.get(i);
             idateTv.setText(dataBean.getDate());
@@ -146,7 +146,7 @@ public class CityWeatherFragment extends BaseFragment implements View.OnClickLis
         sportIndexTv = view.findViewById(R.id.frag_index_tv_sport);
         raysIndexTv = view.findViewById(R.id.frag_index_tv_rays);
         dayIv = view.findViewById(R.id.frag_iv_today);
-        futureLayout = view.findViewById(R.id.frag_center_layout);
+        futureLayout = view.findViewById(R.id.frag_3days_layout);
         outLayout = view.findViewById(R.id.out_layout);
 //        设置点击事件的监听
         clothIndexTv.setOnClickListener(this);
