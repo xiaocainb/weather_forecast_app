@@ -28,8 +28,8 @@ import static android.content.Context.MODE_PRIVATE;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class CityWeatherFragment extends BaseFragment implements View.OnClickListener{
-    TextView tempTv,cityTv,conditionTv,windTv,tempRangeTv,dateTv,clothIndexTv,carIndexTv,coldIndexTv,sportIndexTv,raysIndexTv;
+public class CityWeatherFragment extends BaseFragment implements View.OnClickListener {
+    TextView tempTv, cityTv, conditionTv, windTv, tempRangeTv, dateTv, clothIndexTv, carIndexTv, coldIndexTv, sportIndexTv, raysIndexTv;
     ImageView dayIv;
     LinearLayout futureLayout;
     ScrollView outLayout;
@@ -41,7 +41,7 @@ public class CityWeatherFragment extends BaseFragment implements View.OnClickLis
     private int bgNum;
 
     //        换壁纸的函数
-    public void exchangeBg(){
+    public void exchangeBg() {
         pref = getActivity().getSharedPreferences("bg_pref", MODE_PRIVATE);
         bgNum = pref.getInt("bg", 2);
         switch (bgNum) {
@@ -57,6 +57,7 @@ public class CityWeatherFragment extends BaseFragment implements View.OnClickLis
         }
 
     }
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -66,7 +67,7 @@ public class CityWeatherFragment extends BaseFragment implements View.OnClickLis
 //        可以通过activity传值获取到当前fragment加载的是那个地方的天气情况
         Bundle bundle = getArguments();
         city = bundle.getString("city");
-        String url = url1+city+url2;
+        String url = url1 + city + url2;
 //      调用父类获取数据的方法
         loadData(url);
         return view;
@@ -75,14 +76,15 @@ public class CityWeatherFragment extends BaseFragment implements View.OnClickLis
     @Override
     public void onSuccess(String result) {
 //        解析并展示数据
-         parseShowData(result);
-//         更新数据
+        parseShowData(result);
+//         数据库更新数据
         int i = DBManager.updateInfoByCity(city, result);
-        if (i<=0) {
+        if (i <= 0) {
 //            更新数据库失败，说明没有这条城市信息，增加这个城市记录
-            DBManager.addCityInfo(city,result);
+            DBManager.addCityInfo(city, result);
         }
     }
+
     @Override
     public void onError(Throwable ex, boolean isOnCallback) {
 //        数据库当中查找上一次信息显示在Fragment当中
@@ -92,6 +94,7 @@ public class CityWeatherFragment extends BaseFragment implements View.OnClickLis
         }
 
     }
+
     private void parseShowData(String result) {
 //        使用gson解析数据
         WeatherBean weatherBean = new Gson().fromJson(result, WeatherBean.class);
@@ -163,37 +166,37 @@ public class CityWeatherFragment extends BaseFragment implements View.OnClickLis
             case R.id.frag_index_tv_dress:
                 builder.setTitle("穿衣指数");
                 WeatherBean.ResultsBean.IndexBean indexBean = indexList.get(0);
-                String msg = indexBean.getZs()+"\n"+indexBean.getDes();
+                String msg = indexBean.getZs() + "\n" + indexBean.getDes();
                 builder.setMessage(msg);
-                builder.setPositiveButton("确定",null);
+                builder.setPositiveButton("确定", null);
                 break;
             case R.id.frag_index_tv_washcar:
                 builder.setTitle("洗车指数");
                 indexBean = indexList.get(1);
-                msg = indexBean.getZs()+"\n"+indexBean.getDes();
+                msg = indexBean.getZs() + "\n" + indexBean.getDes();
                 builder.setMessage(msg);
-                builder.setPositiveButton("确定",null);
+                builder.setPositiveButton("确定", null);
                 break;
             case R.id.frag_index_tv_cold:
                 builder.setTitle("感冒指数");
                 indexBean = indexList.get(2);
-                msg = indexBean.getZs()+"\n"+indexBean.getDes();
+                msg = indexBean.getZs() + "\n" + indexBean.getDes();
                 builder.setMessage(msg);
-                builder.setPositiveButton("确定",null);
+                builder.setPositiveButton("确定", null);
                 break;
             case R.id.frag_index_tv_sport:
                 builder.setTitle("运动指数");
                 indexBean = indexList.get(3);
-                msg = indexBean.getZs()+"\n"+indexBean.getDes();
+                msg = indexBean.getZs() + "\n" + indexBean.getDes();
                 builder.setMessage(msg);
-                builder.setPositiveButton("确定",null);
+                builder.setPositiveButton("确定", null);
                 break;
             case R.id.frag_index_tv_rays:
                 builder.setTitle("紫外线指数");
                 indexBean = indexList.get(4);
-                msg = indexBean.getZs()+"\n"+indexBean.getDes();
+                msg = indexBean.getZs() + "\n" + indexBean.getDes();
                 builder.setMessage(msg);
-                builder.setPositiveButton("确定",null);
+                builder.setPositiveButton("确定", null);
                 break;
         }
         builder.create().show();
