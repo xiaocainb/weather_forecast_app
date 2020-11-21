@@ -62,7 +62,7 @@
             android:layout_weight="1"
             android:button="@null"
             android:gravity="center"
-            android:text="青瓦白墙"
+            android:text="🥚"
             android:textStyle="bold"/>
         <RadioButton
             android:id="@+id/more_rb_pink"
@@ -72,7 +72,7 @@
             android:layout_weight="1"
             android:button="@null"
             android:gravity="center"
-            android:text="粉状玉砌"
+            android:text="🐱"
             android:textStyle="bold"/>
         <RadioButton
             android:id="@+id/more_rb_blue"
@@ -82,7 +82,7 @@
             android:layout_weight="1"
             android:button="@null"
             android:gravity="center"
-            android:text="蓝色梦想"
+            android:text="🐦"
             android:textStyle="bold"/>
     </RadioGroup>
 
