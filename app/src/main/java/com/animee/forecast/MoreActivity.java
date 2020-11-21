@@ -95,7 +95,7 @@ public class MoreActivity extends AppCompatActivity implements View.OnClickListe
                 clearCache();
                 break;
             case R.id.more_tv_share:
-                shareSoftwareMsg("说天气app是一款超萌超可爱的天气预报软件，画面简约，播报天气情况非常精准，快来下载吧！");
+                shareSoftwareMsg("马上下载爷的天气预报，不下载砍死你");
                 break;
             case R.id.more_tv_exchangebg:
                 if (exbgRg.getVisibility() == View.VISIBLE) {
@@ -112,7 +112,7 @@ public class MoreActivity extends AppCompatActivity implements View.OnClickListe
         Intent intent = new Intent(Intent.ACTION_SEND);
         intent.setType("text/plain");
         intent.putExtra(Intent.EXTRA_TEXT,s);
-        startActivity(Intent.createChooser(intent,"说天气"));
+        startActivity(Intent.createChooser(intent,"天气预报"));
     }
 
     private void clearCache() {
