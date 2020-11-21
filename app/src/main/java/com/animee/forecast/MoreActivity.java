@@ -54,7 +54,7 @@ public class MoreActivity extends AppCompatActivity implements View.OnClickListe
                 Intent intent = new Intent(MoreActivity.this,MainActivity.class);
                 intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_NEW_TASK);
                 switch (checkedId) {
-                    case R.id.more_rb_green:
+                    case R.id.more_rb_water:
                         if (bg==0) {
                             Toast.makeText(MoreActivity.this,"您选择的为当前背景，无需改变！",Toast.LENGTH_SHORT).show();
                             return;
@@ -62,7 +62,7 @@ public class MoreActivity extends AppCompatActivity implements View.OnClickListe
                         editor.putInt("bg",0);
                         editor.commit();
                         break;
-                    case R.id.more_rb_pink:
+                    case R.id.more_rb_cat:
                         if (bg==1) {
                             Toast.makeText(MoreActivity.this,"您选择的为当前背景，无需改变！",Toast.LENGTH_SHORT).show();
                             return;
@@ -70,7 +70,7 @@ public class MoreActivity extends AppCompatActivity implements View.OnClickListe
                         editor.putInt("bg",1);
                         editor.commit();
                         break;
-                    case R.id.more_rb_blue:
+                    case R.id.more_rb_bird:
                         if (bg==2) {
                             Toast.makeText(MoreActivity.this,"您选择的为当前背景，无需改变！",Toast.LENGTH_SHORT).show();
                             return;
